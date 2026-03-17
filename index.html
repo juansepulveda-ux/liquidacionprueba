@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liquidación de Prueba Chile</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #dbe2ea;
+      --accent: #1d4ed8;
+      --accent-2: #2563eb;
+      --good: #047857;
+      --warn: #b45309;
+      --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #eef3ff 0%, var(--bg) 240px);
+    }
+    .wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+      line-height: 1.1;
+    }
+    .sub {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    button, .button-like {
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 14px;
+      background: var(--accent);
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+    }
+    button.secondary {
+      background: #e8eefc;
+      color: #16377a;
+      box-shadow: none;
+      border: 1px solid #cdd9fb;
+    }
+    button.ghost {
+      background: #fff;
+      color: var(--text);
+      box-shadow: none;
+      border: 1px solid var(--line);
+    }
+    button.warn {
+      background: #fff7ed;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+      box-shadow: none;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      align-items: start;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid #edf2f7;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .card h2 {
+      margin: 0 0 14px;
+      font-size: 20px;
+    }
+    .section-title {
+      margin: 18px 0 10px;
+      font-size: 15px;
+      color: #0f172a;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 14px;
+    }
+    .form-grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    input[type="number"], input[type="text"], select, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 14px;
+      color: var(--text);
+      background: #fff;
+    }
+    input[type="checkbox"] { transform: translateY(1px); }
+    .inline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .inline > label { margin-bottom: 0; }
+    .muted {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .tiny {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 8px;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .summary-box {
+      background: #f8fbff;
+      border: 1px solid #dce8ff;
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .summary-box .k {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .summary-box .v {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+    .summary-box.good { background: #ecfdf5; border-color: #bbf7d0; }
+    .summary-box.good .v { color: var(--good); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      border-bottom: 1px solid #edf2f7;
+      padding: 10px 8px;
+      text-align: left;
+      vertical-align: middle;
+    }
+    th:last-child, td:last-child { text-align: right; }
+    .thead {
+      background: #f8fafc;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+    .total-row td {
+      font-weight: 800;
+      background: #fcfdff;
+    }
+    .liquido-row td {
+      font-weight: 900;
+      font-size: 16px;
+      color: var(--good);
+      background: #ecfdf5;
+    }
+    .two-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .tax-tools {
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: 10px;
+      align-items: end;
+      margin-bottom: 12px;
+    }
+    .tax-table input {
+      font-size: 13px;
+      padding: 8px 10px;
+      border-radius: 10px;
+    }
+    .tax-table th, .tax-table td { padding: 8px 6px; }
+    .status {
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      margin-top: 10px;
+      display: none;
+    }
+    .status.ok {
+      display: block;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+    }
+    .status.err {
+      display: block;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+    }
+    details {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: #fafcff;
+    }
+    details summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .print-sheet {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: #fff;
+    }
+    .print-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+      align-items: start;
+    }
+    .print-title {
+      font-size: 24px;
+      font-weight: 800;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .legend-note {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    @media (max-width: 1100px) {
+      .grid { grid-template-columns: 1fr; }
+      .summary-grid { grid-template-columns: 1fr; }
+      .two-cols { grid-template-columns: 1fr; }
+      .tax-tools { grid-template-columns: 1fr; }
+      .form-grid, .form-grid.three { grid-template-columns: 1fr; }
+    }
+    @media print {
+      body { background: white; }
+      .no-print { display: none !important; }
+      .wrap { max-width: none; padding: 0; }
+      .card { box-shadow: none; border: 0; padding: 0; }
+      .grid { display: block; }
+      .print-sheet { border: 0; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="no-print">
+      <h1>Liquidación de prueba</h1>
+      <div class="sub">Simulador referencial de liquidación chilena. Puedes ajustar sueldo base, movilización, colación, gratificación, AFP, salud, AFC e impuesto.</div>
+      <div class="top-actions">
+        <button id="btnRecalc">Recalcular</button>
+        <button class="secondary" id="btnEjemplo">Cargar ejemplo</button>
+        <button class="ghost" id="btnGuardar">Guardar parámetros</button>
+        <button class="ghost" id="btnExportJson">Exportar tabla impuesto</button>
+        <button class="ghost" id="btnImportJson">Importar tabla impuesto</button>
+        <input id="fileImportJson" type="file" accept="application/json" style="display:none" />
+        <button class="warn" id="btnPrint">Imprimir / PDF</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div>
+        <div class="card no-print">
+          <h2>Parámetros</h2>
+
+          <div class="section-title">Período</div>
+          <div class="form-grid three">
+            <div>
+              <label for="periodYear">Año</label>
+              <input id="periodYear" type="number" value="2026" />
+            </div>
+            <div>
+              <label for="periodMonth">Mes</label>
+              <select id="periodMonth">
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3" selected>Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+              </select>
+            </div>
+            <div>
+              <label for="employeeName">Trabajador</label>
+              <input id="employeeName" type="text" placeholder="Nombre trabajador" value="Trabajador de prueba" />
+            </div>
+          </div>
+
+          <div class="section-title">Haberes</div>
+          <div class="form-grid three">
+            <div>
+              <label for="baseSalary">Sueldo base</label>
+              <input id="baseSalary" type="number" min="0" step="1" value="253000" />
+            </div>
+            <div>
+              <label for="collation">Colación</label>
+              <input id="collation" type="number" min="0" step="1" value="20000" />
+            </div>
+            <div>
+              <label for="transport">Movilización</label>
+              <input id="transport" type="number" min="0" step="1" value="20000" />
+            </div>
+            <div>
+              <label for="otherImponible">Otro imponible</label>
+              <input id="otherImponible" type="number" min="0" step="1" value="0" />
+            </div>
+            <div>
+              <label for="otherNoImponible">Otro no imponible</label>
+              <input id="otherNoImponible" type="number" min="0" step="1" value="0" />
+            </div>
+            <div>
+              <label for="otherDiscounts">Otros descuentos</label>
+              <input id="otherDiscounts" type="number" min="0" step="1" value="0" />
+            </div>
+          </div>
+
+          <div class="section-title">Gratificación</div>
+          <div class="inline" style="margin-bottom:10px;">
+            <label><input type="radio" name="gratMode" value="auto" checked /> Automática</label>
+            <label><input type="radio" name="gratMode" value="manual" /> Manual</label>
+          </div>
+          <div class="form-grid three">
+            <div>
+              <label for="gratPercent">Porcentaje automático</label>
+              <input id="gratPercent" type="number" min="0" step="0.01" value="25" />
+            </div>
+            <div>
+              <label for="gratManual">Gratificación manual</label>
+              <input id="gratManual" type="number" min="0" step="1" value="63250" />
+            </div>
+            <div>
+              <label for="gratCap">Tope gratificación</label>
+              <input id="gratCap" type="number" min="0" step="1" value="0" />
+            </div>
+          </div>
+          <div class="tiny">Si el tope es 0, no se aplica tope. Para simulaciones simples, muchas veces basta con 25% del sueldo base u otros imponibles que quieras considerar.</div>
+
+          <div class="section-title">Previsión y salud</div>
+          <div class="form-grid three">
+            <div>
+              <label for="afpName">AFP</label>
+              <select id="afpName">
+                <option value="capital">Capital</option>
+                <option value="cuprum">Cuprum</option>
+                <option value="habitat">Habitat</option>
+                <option value="modelo" selected>Modelo</option>
+                <option value="planvital">Planvital</option>
+                <option value="provida">Provida</option>
+                <option value="uno">Uno</option>
+                <option value="custom">Personalizada</option>
+              </select>
+            </div>
+            <div>
+              <label for="afpCommission">Comisión AFP (%)</label>
+              <input id="afpCommission" type="number" min="0" step="0.01" value="0.58" />
+            </div>
+            <div>
+              <label for="afpMandatory">Cotización obligatoria AFP (%)</label>
+              <input id="afpMandatory" type="number" min="0" step="0.01" value="10" />
+            </div>
+          </div>
+          <div class="inline" style="margin: 10px 0 6px;">
+            <label><input type="radio" name="healthMode" value="fonasa" checked /> Fonasa 7%</label>
+            <label><input type="radio" name="healthMode" value="isapre" /> Isapre</label>
+          </div>
+          <div class="form-grid three">
+            <div>
+              <label for="healthLegalRate">Tasa legal salud (%)</label>
+              <input id="healthLegalRate" type="number" min="0" step="0.01" value="7" />
+            </div>
+            <div>
+              <label for="isapreAmount">Monto Isapre</label>
+              <input id="isapreAmount" type="number" min="0" step="1" value="22138" />
+            </div>
+            <div>
+              <label for="isaprePolicy">Isapre: usar</label>
+              <select id="isaprePolicy">
+                <option value="entered" selected>Monto ingresado</option>
+                <option value="max">Máximo entre 7% y monto ingresado</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="section-title">AFC</div>
+          <div class="inline">
+            <label><input id="afcEnabled" type="checkbox" /> Descontar AFC trabajador</label>
+            <span class="tiny">Úsalo solo si corresponde al tipo de contrato que estás simulando.</span>
+          </div>
+          <div class="form-grid three" style="margin-top:10px;">
+            <div>
+              <label for="afcRate">Tasa AFC trabajador (%)</label>
+              <input id="afcRate" type="number" min="0" step="0.01" value="0.6" />
+            </div>
+          </div>
+
+          <div class="section-title">Impuesto único</div>
+          <div class="inline" style="margin-bottom:10px;">
+            <label><input type="radio" name="taxMode" value="table" checked /> Automático según tabla</label>
+            <label><input type="radio" name="taxMode" value="manual" /> Manual</label>
+          </div>
+          <div class="form-grid three">
+            <div>
+              <label for="taxManualAmount">Impuesto manual</label>
+              <input id="taxManualAmount" type="number" min="0" step="1" value="0" />
+            </div>
+            <div>
+              <label for="taxPeriodKind">Periodicidad tabla</label>
+              <select id="taxPeriodKind">
+                <option value="MENSUAL" selected>Mensual</option>
+                <option value="QUINCENAL">Quincenal</option>
+                <option value="SEMANAL">Semanal</option>
+                <option value="DIARIO">Diario</option>
+              </select>
+            </div>
+            <div>
+              <label for="apiEndpoint">API tabla SII (opcional)</label>
+              <input id="apiEndpoint" type="text" placeholder="https://tu-servidor/api/impuesto" />
+            </div>
+          </div>
+
+          <details style="margin-top:14px;">
+            <summary>Tabla local de impuesto</summary>
+            <div class="tiny" style="margin:10px 0 12px;">La app puede consultar una API si luego la conectas a un backend que lea el SII. Mientras tanto, usa esta tabla local editable. El formato esperado por la API es: <code>{ brackets: [{ period: "MENSUAL", from: 0, to: 943501.5, factor: 0, rebate: 0 }, ...] }</code>.</div>
+            <div class="tax-tools">
+              <div>
+                <label for="taxTableMonthSelect">Cargar tabla local de</label>
+                <select id="taxTableMonthSelect">
+                  <option value="2026-1">Enero 2026</option>
+                  <option value="2026-2">Febrero 2026</option>
+                  <option value="2026-3" selected>Marzo 2026</option>
+                  <option value="2026-4">Abril 2026</option>
+                </select>
+              </div>
+              <button class="secondary" id="btnLoadMonthTable">Cargar</button>
+              <button class="secondary" id="btnAddTaxRow">Agregar fila</button>
+              <button class="ghost" id="btnFetchApi">Consultar API</button>
+            </div>
+            <table class="tax-table" id="taxTableEditor">
+              <thead class="thead">
+                <tr>
+                  <th>Período</th>
+                  <th>Desde</th>
+                  <th>Hasta</th>
+                  <th>Factor</th>
+                  <th>Rebaja</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+            <div id="taxStatus" class="status"></div>
+          </details>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <div class="summary-grid">
+            <div class="summary-box">
+              <div class="k">Total haberes</div>
+              <div class="v" id="sumHaberes">$ 0</div>
+            </div>
+            <div class="summary-box">
+              <div class="k">Total descuentos</div>
+              <div class="v" id="sumDescuentos">$ 0</div>
+            </div>
+            <div class="summary-box good">
+              <div class="k">Alcance líquido</div>
+              <div class="v" id="sumLiquido">$ 0</div>
+            </div>
+          </div>
+
+          <div class="print-sheet" id="printSheet">
+            <div class="print-head">
+              <div>
+                <div class="print-title">Liquidación de prueba</div>
+                <div class="meta" id="metaBlock"></div>
+              </div>
+              <div class="meta" style="text-align:right">
+                <div><span class="pill">Chile</span>Simulación referencial</div>
+                <div id="taxSourceTag">Fuente impuesto: tabla local</div>
+              </div>
+            </div>
+
+            <div class="two-cols">
+              <div>
+                <h2 style="margin-top:0;">Haberes</h2>
+                <table id="earningsTable">
+                  <thead class="thead">
+                    <tr><th>Concepto</th><th>Monto</th></tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+              <div>
+                <h2 style="margin-top:0;">Descuentos</h2>
+                <table id="deductionsTable">
+                  <thead class="thead">
+                    <tr><th>Concepto</th><th>Monto</th></tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="legend-note" id="legendNote"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'liq-sim-params-v1';
+    const TAX_STORAGE_KEY = 'liq-sim-tax-v1';
+
+    const AFP_COMMISSIONS = {
+      capital: 1.44,
+      cuprum: 1.44,
+      habitat: 1.27,
+      modelo: 0.58,
+      planvital: 1.16,
+      provida: 1.45,
+      uno: 0.46,
+      custom: 0.58,
+    };
+
+    const DEFAULT_TAX_TABLES = {
+      '2026-1': [
+        { period: 'MENSUAL', from: 0, to: 941638.50, factor: 0, rebate: 0 },
+        { period: 'MENSUAL', from: 941638.51, to: 2092530.00, factor: 0.04, rebate: 37665.54 },
+        { period: 'MENSUAL', from: 2092530.01, to: 3487550.00, factor: 0.08, rebate: 121366.74 },
+        { period: 'MENSUAL', from: 3487550.01, to: 4882570.00, factor: 0.135, rebate: 313181.99 },
+        { period: 'MENSUAL', from: 4882570.01, to: 6277590.00, factor: 0.23, rebate: 777026.14 },
+        { period: 'MENSUAL', from: 6277590.01, to: 8370120.00, factor: 0.304, rebate: 1241567.80 },
+        { period: 'MENSUAL', from: 8370120.01, to: 21622810.00, factor: 0.35, rebate: 1626593.32 },
+        { period: 'MENSUAL', from: 21622810.01, to: null, factor: 0.4, rebate: 2713090.98 },
+      ],
+      '2026-2': [
+        { period: 'MENSUAL', from: 0, to: 939748.50, factor: 0, rebate: 0 },
+        { period: 'MENSUAL', from: 939748.51, to: 2088330.00, factor: 0.04, rebate: 37589.94 },
+        { period: 'MENSUAL', from: 2088330.01, to: 3480550.00, factor: 0.08, rebate: 121123.14 },
+        { period: 'MENSUAL', from: 3480550.01, to: 4872770.00, factor: 0.135, rebate: 312553.39 },
+        { period: 'MENSUAL', from: 4872770.01, to: 6264990.00, factor: 0.23, rebate: 775466.54 },
+        { period: 'MENSUAL', from: 6264990.01, to: 8353320.00, factor: 0.304, rebate: 1239075.80 },
+        { period: 'MENSUAL', from: 8353320.01, to: 21579410.00, factor: 0.35, rebate: 1623328.52 },
+        { period: 'MENSUAL', from: 21579410.01, to: null, factor: 0.4, rebate: 2702299.02 },
+      ],
+      '2026-3': [
+        { period: 'MENSUAL', from: 0, to: 943501.50, factor: 0, rebate: 0 },
+        { period: 'MENSUAL', from: 943501.51, to: 2096670.00, factor: 0.04, rebate: 37740.06 },
+        { period: 'MENSUAL', from: 2096670.01, to: 3494450.00, factor: 0.08, rebate: 121606.86 },
+        { period: 'MENSUAL', from: 3494450.01, to: 4892230.00, factor: 0.135, rebate: 313801.61 },
+        { period: 'MENSUAL', from: 4892230.01, to: 6290010.00, factor: 0.23, rebate: 778563.46 },
+        { period: 'MENSUAL', from: 6290010.01, to: 8386680.00, factor: 0.304, rebate: 1244024.20 },
+        { period: 'MENSUAL', from: 8386680.01, to: 21665590.00, factor: 0.35, rebate: 1629811.48 },
+        { period: 'MENSUAL', from: 21665590.01, to: null, factor: 0.4, rebate: 2713090.98 },
+      ],
+      '2026-4': [
+        { period: 'MENSUAL', from: 0, to: 943501.50, factor: 0, rebate: 0 },
+        { period: 'MENSUAL', from: 943501.51, to: 2096670.00, factor: 0.04, rebate: 37740.06 },
+        { period: 'MENSUAL', from: 2096670.01, to: 3494450.00, factor: 0.08, rebate: 121606.86 },
+        { period: 'MENSUAL', from: 3494450.01, to: 4892230.00, factor: 0.135, rebate: 313801.61 },
+        { period: 'MENSUAL', from: 4892230.01, to: 6290010.00, factor: 0.23, rebate: 778563.46 },
+        { period: 'MENSUAL', from: 6290010.01, to: 8386680.00, factor: 0.304, rebate: 1244024.20 },
+        { period: 'MENSUAL', from: 8386680.01, to: 21665590.00, factor: 0.35, rebate: 1629811.48 },
+        { period: 'MENSUAL', from: 21665590.01, to: null, factor: 0.4, rebate: 2713090.98 },
+      ],
+    };
+
+    const els = {
+      periodYear: document.getElementById('periodYear'),
+      periodMonth: document.getElementById('periodMonth'),
+      employeeName: document.getElementById('employeeName'),
+      baseSalary: document.getElementById('baseSalary'),
+      collation: document.getElementById('collation'),
+      transport: document.getElementById('transport'),
+      otherImponible: document.getElementById('otherImponible'),
+      otherNoImponible: document.getElementById('otherNoImponible'),
+      otherDiscounts: document.getElementById('otherDiscounts'),
+      gratPercent: document.getElementById('gratPercent'),
+      gratManual: document.getElementById('gratManual'),
+      gratCap: document.getElementById('gratCap'),
+      afpName: document.getElementById('afpName'),
+      afpCommission: document.getElementById('afpCommission'),
+      afpMandatory: document.getElementById('afpMandatory'),
+      healthLegalRate: document.getElementById('healthLegalRate'),
+      isapreAmount: document.getElementById('isapreAmount'),
+      isaprePolicy: document.getElementById('isaprePolicy'),
+      afcEnabled: document.getElementById('afcEnabled'),
+      afcRate: document.getElementById('afcRate'),
+      taxManualAmount: document.getElementById('taxManualAmount'),
+      taxPeriodKind: document.getElementById('taxPeriodKind'),
+      apiEndpoint: document.getElementById('apiEndpoint'),
+      taxTableMonthSelect: document.getElementById('taxTableMonthSelect'),
+      taxTableEditor: document.querySelector('#taxTableEditor tbody'),
+      taxStatus: document.getElementById('taxStatus'),
+      sumHaberes: document.getElementById('sumHaberes'),
+      sumDescuentos: document.getElementById('sumDescuentos'),
+      sumLiquido: document.getElementById('sumLiquido'),
+      earningsTable: document.querySelector('#earningsTable tbody'),
+      deductionsTable: document.querySelector('#deductionsTable tbody'),
+      metaBlock: document.getElementById('metaBlock'),
+      taxSourceTag: document.getElementById('taxSourceTag'),
+      legendNote: document.getElementById('legendNote'),
+    };
+
+    let currentTaxRows = [];
+    let currentTaxSource = 'tabla local';
+
+    function clampNumber(v) {
+      const n = Number(v);
+      return Number.isFinite(n) ? n : 0;
+    }
+
+    function roundPeso(v) {
+      return Math.round(clampNumber(v));
+    }
+
+    function fmtMoney(v) {
+      const n = roundPeso(v);
+      const sign = n < 0 ? '-$ ' : '$ ';
+      return sign + Math.abs(n).toLocaleString('es-CL');
+    }
+
+    function fmtNum(v, digits = 2) {
+      return Number(v || 0).toLocaleString('es-CL', { minimumFractionDigits: digits, maximumFractionDigits: digits });
+    }
+
+    function getRadio(name) {
+      const checked = document.querySelector(`input[name="${name}"]:checked`);
+      return checked ? checked.value : '';
+    }
+
+    function setStatus(msg, type = 'ok') {
+      els.taxStatus.textContent = msg;
+      els.taxStatus.className = `status ${type}`;
+    }
+
+    function clearStatus() {
+      els.taxStatus.textContent = '';
+      els.taxStatus.className = 'status';
+    }
+
+    function taxKeyFromInputs() {
+      return `${clampNumber(els.periodYear.value)}-${clampNumber(els.periodMonth.value)}`;
+    }
+
+    function deepCopy(obj) {
+      return JSON.parse(JSON.stringify(obj));
+    }
+
+    function loadSavedTaxTables() {
+      try {
+        const raw = localStorage.getItem(TAX_STORAGE_KEY);
+        if (!raw) return deepCopy(DEFAULT_TAX_TABLES);
+        const parsed = JSON.parse(raw);
+        return Object.assign(deepCopy(DEFAULT_TAX_TABLES), parsed || {});
+      } catch {
+        return deepCopy(DEFAULT_TAX_TABLES);
+      }
+    }
+
+    let taxTables = loadSavedTaxTables();
+
+    function saveTaxTables() {
+      localStorage.setItem(TAX_STORAGE_KEY, JSON.stringify(taxTables));
+    }
+
+    function renderTaxEditor(rows) {
+      currentTaxRows = rows.map(r => ({ ...r }));
+      els.taxTableEditor.innerHTML = '';
+      currentTaxRows.forEach((row, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>
+            <select data-field="period" data-idx="${idx}">
+              <option value="MENSUAL" ${row.period === 'MENSUAL' ? 'selected' : ''}>MENSUAL</option>
+              <option value="QUINCENAL" ${row.period === 'QUINCENAL' ? 'selected' : ''}>QUINCENAL</option>
+              <option value="SEMANAL" ${row.period === 'SEMANAL' ? 'selected' : ''}>SEMANAL</option>
+              <option value="DIARIO" ${row.period === 'DIARIO' ? 'selected' : ''}>DIARIO</option>
+            </select>
+          </td>
+          <td><input type="number" step="0.01" min="0" data-field="from" data-idx="${idx}" value="${row.from ?? 0}" /></td>
+          <td><input type="number" step="0.01" min="0" data-field="to" data-idx="${idx}" value="${row.to ?? ''}" placeholder="vacío = sin tope" /></td>
+          <td><input type="number" step="0.0001" min="0" data-field="factor" data-idx="${idx}" value="${row.factor ?? 0}" /></td>
+          <td><input type="number" step="0.01" min="0" data-field="rebate" data-idx="${idx}" value="${row.rebate ?? 0}" /></td>
+          <td><button class="ghost" data-remove="${idx}" type="button">Quitar</button></td>
+        `;
+        els.taxTableEditor.appendChild(tr);
+      });
+      bindTaxEditorEvents();
+    }
+
+    function bindTaxEditorEvents() {
+      els.taxTableEditor.querySelectorAll('input, select').forEach(el => {
+        el.addEventListener('input', onTaxEditorChange);
+        el.addEventListener('change', onTaxEditorChange);
+      });
+      els.taxTableEditor.querySelectorAll('button[data-remove]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = Number(btn.dataset.remove);
+          currentTaxRows.splice(idx, 1);
+          persistCurrentTaxRows();
+          renderTaxEditor(currentTaxRows);
+          calculate();
+        });
+      });
+    }
+
+    function onTaxEditorChange(e) {
+      const idx = Number(e.target.dataset.idx);
+      const field = e.target.dataset.field;
+      if (!Number.isFinite(idx) || !field || !currentTaxRows[idx]) return;
+      if (field === 'period') {
+        currentTaxRows[idx][field] = e.target.value;
+      } else {
+        const value = e.target.value === '' ? null : Number(e.target.value);
+        currentTaxRows[idx][field] = Number.isFinite(value) ? value : null;
+      }
+      persistCurrentTaxRows();
+      calculate();
+    }
+
+    function persistCurrentTaxRows() {
+      const key = taxKeyFromInputs();
+      taxTables[key] = currentTaxRows.map(r => ({ ...r }));
+      saveTaxTables();
+    }
+
+    function loadCurrentTaxTable() {
+      const key = taxKeyFromInputs();
+      const rows = taxTables[key] || taxTables[`${els.taxTableMonthSelect.value}`] || [];
+      renderTaxEditor(rows.length ? rows : [{ period: 'MENSUAL', from: 0, to: null, factor: 0, rebate: 0 }]);
+      clearStatus();
+    }
+
+    function findBracket(taxable, period) {
+      const rows = currentTaxRows
+        .filter(r => String(r.period || '').toUpperCase() === String(period || '').toUpperCase())
+        .map(r => ({
+          period: String(r.period || 'MENSUAL').toUpperCase(),
+          from: clampNumber(r.from),
+          to: r.to === null || r.to === '' || typeof r.to === 'undefined' ? null : clampNumber(r.to),
+          factor: clampNumber(r.factor),
+          rebate: clampNumber(r.rebate),
+        }))
+        .sort((a, b) => a.from - b.from);
+
+      for (const row of rows) {
+        const withinLower = taxable >= row.from;
+        const withinUpper = row.to === null ? true : taxable <= row.to;
+        if (withinLower && withinUpper) return row;
+      }
+      return null;
+    }
+
+    function resolveGratification() {
+      const mode = getRadio('gratMode');
+      if (mode === 'manual') return roundPeso(els.gratManual.value);
+      const base = clampNumber(els.baseSalary.value) + clampNumber(els.otherImponible.value);
+      let grat = base * clampNumber(els.gratPercent.value) / 100;
+      const cap = clampNumber(els.gratCap.value);
+      if (cap > 0) grat = Math.min(grat, cap);
+      return roundPeso(grat);
+    }
+
+    function resolveAFPCommission() {
+      const key = els.afpName.value;
+      const auto = AFP_COMMISSIONS[key];
+      if (key !== 'custom' && Number.isFinite(auto)) {
+        els.afpCommission.value = auto;
+        return auto;
+      }
+      return clampNumber(els.afpCommission.value);
+    }
+
+    function resolveHealth(imponible) {
+      const legalRate = clampNumber(els.healthLegalRate.value) / 100;
+      const legalAmount = roundPeso(imponible * legalRate);
+      const mode = getRadio('healthMode');
+      if (mode === 'fonasa') {
+        return {
+          label: `${fmtNum(clampNumber(els.healthLegalRate.value), 2)}% (Fonasa)`,
+          amount: legalAmount,
+        };
+      }
+      const entered = roundPeso(els.isapreAmount.value);
+      const amount = els.isaprePolicy.value === 'max' ? Math.max(legalAmount, entered) : entered;
+      return {
+        label: `Salud (Isapre)`,
+        amount,
+      };
+    }
+
+    function resolveTax(taxable) {
+      const mode = getRadio('taxMode');
+      if (mode === 'manual') {
+        currentTaxSource = 'manual';
+        return {
+          amount: roundPeso(els.taxManualAmount.value),
+          bracket: null,
+          formula: 'manual',
+        };
+      }
+      const period = els.taxPeriodKind.value;
+      const bracket = findBracket(taxable, period);
+      currentTaxSource = 'tabla local';
+      if (!bracket) {
+        return { amount: 0, bracket: null, formula: 'sin tramo' };
+      }
+      const amount = roundPeso(Math.max(0, taxable * bracket.factor - bracket.rebate));
+      return { amount, bracket, formula: 'tabla' };
+    }
+
+    function rowHtml(label, amount, extraClass = '') {
+      return `<tr class="${extraClass}"><td>${label}</td><td>${fmtMoney(amount)}</td></tr>`;
+    }
+
+    function calculate() {
+      resolveAFPCommission();
+
+      const year = clampNumber(els.periodYear.value);
+      const month = clampNumber(els.periodMonth.value);
+      const monthName = els.periodMonth.options[els.periodMonth.selectedIndex]?.text || '';
+      const worker = els.employeeName.value.trim() || 'Trabajador de prueba';
+
+      const sueldoBase = roundPeso(els.baseSalary.value);
+      const gratificacion = resolveGratification();
+      const otroImponible = roundPeso(els.otherImponible.value);
+      const colacion = roundPeso(els.collation.value);
+      const movilizacion = roundPeso(els.transport.value);
+      const otroNoImponible = roundPeso(els.otherNoImponible.value);
+      const otrosDescuentos = roundPeso(els.otherDiscounts.value);
+
+      const totalImponible = sueldoBase + gratificacion + otroImponible;
+      const totalNoImponible = colacion + movilizacion + otroNoImponible;
+      const totalHaberes = totalImponible + totalNoImponible;
+
+      const afpMandatoryRate = clampNumber(els.afpMandatory.value) / 100;
+      const afpCommissionRate = clampNumber(els.afpCommission.value) / 100;
+      const afpMandatory = roundPeso(totalImponible * afpMandatoryRate);
+      const afpCommission = roundPeso(totalImponible * afpCommissionRate);
+      const afpTotal = afpMandatory + afpCommission;
+      const afpRateLabel = fmtNum((afpMandatoryRate + afpCommissionRate) * 100, 2);
+
+      const health = resolveHealth(totalImponible);
+      const afcAmount = els.afcEnabled.checked ? roundPeso(totalImponible * clampNumber(els.afcRate.value) / 100) : 0;
+
+      const rentaTributable = totalImponible - afpTotal - health.amount - afcAmount;
+      const tax = resolveTax(rentaTributable);
+
+      const totalLegales = afpTotal + health.amount + afcAmount + tax.amount;
+      const totalDescuentos = totalLegales + otrosDescuentos;
+      const liquido = totalHaberes - totalDescuentos;
+
+      els.sumHaberes.textContent = fmtMoney(totalHaberes);
+      els.sumDescuentos.textContent = fmtMoney(totalDescuentos);
+      els.sumLiquido.textContent = fmtMoney(liquido);
+
+      els.metaBlock.innerHTML = `
+        <div><strong>Trabajador:</strong> ${escapeHtml(worker)}</div>
+        <div><strong>Período:</strong> ${escapeHtml(monthName)} ${year}</div>
+        <div><strong>AFP:</strong> ${escapeHtml(labelAFP(els.afpName.value))}</div>
+        <div><strong>Modo impuesto:</strong> ${getRadio('taxMode') === 'manual' ? 'Manual' : 'Automático según tabla'}</div>
+      `;
+      els.taxSourceTag.textContent = `Fuente impuesto: ${currentTaxSource}`;
+      els.legendNote.textContent = tax.formula === 'tabla' && tax.bracket
+        ? `Impuesto calculado como máx(0, renta tributable × factor − rebaja). Tramo aplicado: desde ${fmtMoney(tax.bracket.from)} hasta ${tax.bracket.to === null ? 'sin tope' : fmtMoney(tax.bracket.to)} | factor ${fmtNum(tax.bracket.factor, 4)} | rebaja ${fmtMoney(tax.bracket.rebate)}.`
+        : `Si necesitas automatizar la lectura del SII, puedes conectar una API propia en el campo "API tabla SII". En HTML puro no es confiable consultar directo a sii.cl por restricciones del navegador.`;
+
+      const earningsRows = [
+        rowHtml('Sueldo Base', sueldoBase),
+        rowHtml('Gratificación Mensual', gratificacion),
+      ];
+      if (otroImponible > 0) earningsRows.push(rowHtml('Otro imponible', otroImponible));
+      earningsRows.push(rowHtml('TOTAL IMPONIBLE', totalImponible, 'total-row'));
+      earningsRows.push(rowHtml('Colación', colacion));
+      earningsRows.push(rowHtml('Movilización', movilizacion));
+      if (otroNoImponible > 0) earningsRows.push(rowHtml('Otro no imponible', otroNoImponible));
+      earningsRows.push(rowHtml('TOTAL NO IMPONIBLE', totalNoImponible, 'total-row'));
+      earningsRows.push(rowHtml('TOTAL HABERES', totalHaberes, 'total-row'));
+      els.earningsTable.innerHTML = earningsRows.join('');
+
+      const deductionsRows = [
+        rowHtml(`AFP (${escapeHtml(labelAFP(els.afpName.value))}: ${afpRateLabel}% : Renta Imponible: ${fmtMoney(totalImponible)})`, afpTotal),
+        rowHtml(`${escapeHtml(health.label)}`, health.amount),
+      ];
+      if (afcAmount > 0) deductionsRows.push(rowHtml(`AFC trabajador (${fmtNum(clampNumber(els.afcRate.value), 2)}%)`, afcAmount));
+      deductionsRows.push(rowHtml(`Impuestos (Renta Tributable: ${fmtMoney(rentaTributable)})`, tax.amount));
+      deductionsRows.push(rowHtml('TOTAL DESC. LEGALES', totalLegales, 'total-row'));
+      deductionsRows.push(rowHtml('TOTAL OTROS DESC.', otrosDescuentos, 'total-row'));
+      deductionsRows.push(rowHtml('ALCANCE LÍQUIDO', liquido, 'liquido-row'));
+      els.deductionsTable.innerHTML = deductionsRows.join('');
+
+      saveParams();
+    }
+
+    function labelAFP(key) {
+      const map = {
+        capital: 'Capital',
+        cuprum: 'Cuprum',
+        habitat: 'Habitat',
+        modelo: 'Modelo',
+        planvital: 'Planvital',
+        provida: 'Provida',
+        uno: 'Uno',
+        custom: 'Personalizada',
+      };
+      return map[key] || 'AFP';
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function saveParams() {
+      const inputs = document.querySelectorAll('input, select');
+      const data = {};
+      inputs.forEach(el => {
+        if (!el.id) return;
+        if (el.type === 'checkbox') data[el.id] = el.checked;
+        else data[el.id] = el.value;
+      });
+      data.gratMode = getRadio('gratMode');
+      data.healthMode = getRadio('healthMode');
+      data.taxMode = getRadio('taxMode');
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function loadParams() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        Object.entries(data).forEach(([k, v]) => {
+          const el = document.getElementById(k);
+          if (!el) return;
+          if (el.type === 'checkbox') el.checked = !!v;
+          else el.value = v;
+        });
+        if (data.gratMode) document.querySelector(`input[name="gratMode"][value="${data.gratMode}"]`)?.click();
+        if (data.healthMode) document.querySelector(`input[name="healthMode"][value="${data.healthMode}"]`)?.click();
+        if (data.taxMode) document.querySelector(`input[name="taxMode"][value="${data.taxMode}"]`)?.click();
+      } catch {}
+    }
+
+    function loadExample() {
+      els.periodYear.value = 2026;
+      els.periodMonth.value = 3;
+      els.employeeName.value = 'Trabajador de prueba';
+      els.baseSalary.value = 253000;
+      els.collation.value = 20000;
+      els.transport.value = 20000;
+      els.otherImponible.value = 0;
+      els.otherNoImponible.value = 0;
+      els.otherDiscounts.value = 0;
+      document.querySelector('input[name="gratMode"][value="manual"]').checked = true;
+      els.gratPercent.value = 25;
+      els.gratManual.value = 63250;
+      els.gratCap.value = 0;
+      els.afpName.value = 'modelo';
+      els.afpCommission.value = 0.58;
+      els.afpMandatory.value = 10;
+      document.querySelector('input[name="healthMode"][value="fonasa"]').checked = true;
+      els.healthLegalRate.value = 7;
+      els.isapreAmount.value = 22138;
+      els.isaprePolicy.value = 'entered';
+      els.afcEnabled.checked = false;
+      els.afcRate.value = 0.6;
+      document.querySelector('input[name="taxMode"][value="table"]').checked = true;
+      els.taxManualAmount.value = 0;
+      els.taxPeriodKind.value = 'MENSUAL';
+      els.taxTableMonthSelect.value = '2026-3';
+      loadCurrentTaxTable();
+      calculate();
+    }
+
+    async function fetchTaxApi() {
+      const endpoint = els.apiEndpoint.value.trim();
+      if (!endpoint) {
+        setStatus('Ingresa primero una URL de API.', 'err');
+        return;
+      }
+      const year = clampNumber(els.periodYear.value);
+      const month = clampNumber(els.periodMonth.value);
+      try {
+        setStatus('Consultando API...', 'ok');
+        const url = new URL(endpoint, window.location.href);
+        url.searchParams.set('anio', year);
+        url.searchParams.set('mes', month);
+        url.searchParams.set('periodo', els.taxPeriodKind.value);
+        const res = await fetch(url.toString());
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const brackets = Array.isArray(data.brackets) ? data.brackets : [];
+        if (!brackets.length) throw new Error('La API no devolvió tramos.');
+        currentTaxSource = data.source || 'API';
+        taxTables[taxKeyFromInputs()] = brackets.map(b => ({
+          period: String(b.period || els.taxPeriodKind.value || 'MENSUAL').toUpperCase(),
+          from: Number(b.from ?? 0),
+          to: b.to === null || b.to === '' || typeof b.to === 'undefined' ? null : Number(b.to),
+          factor: Number(b.factor ?? 0),
+          rebate: Number(b.rebate ?? 0),
+        }));
+        saveTaxTables();
+        loadCurrentTaxTable();
+        setStatus('Tabla cargada desde API y guardada localmente.', 'ok');
+        calculate();
+      } catch (err) {
+        setStatus(`No se pudo consultar la API: ${err.message}`, 'err');
+      }
+    }
+
+    function exportTaxJson() {
+      const blob = new Blob([JSON.stringify(taxTables, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'tablas_impuesto_liquidacion.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function importTaxJson(file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(reader.result);
+          taxTables = Object.assign(deepCopy(DEFAULT_TAX_TABLES), parsed || {});
+          saveTaxTables();
+          loadCurrentTaxTable();
+          calculate();
+          setStatus('Tabla importada correctamente.', 'ok');
+        } catch {
+          setStatus('El archivo JSON no tiene un formato válido.', 'err');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function bindEvents() {
+      document.querySelectorAll('input, select').forEach(el => {
+        if (el.id === 'fileImportJson') return;
+        el.addEventListener('input', calculate);
+        el.addEventListener('change', () => {
+          if (el.id === 'afpName') resolveAFPCommission();
+          if (el.id === 'periodYear' || el.id === 'periodMonth') {
+            const key = taxKeyFromInputs();
+            els.taxTableMonthSelect.value = key;
+            loadCurrentTaxTable();
+          }
+          calculate();
+        });
+      });
+      document.querySelectorAll('input[name="gratMode"], input[name="healthMode"], input[name="taxMode"]').forEach(el => {
+        el.addEventListener('change', calculate);
+      });
+      document.getElementById('btnRecalc').addEventListener('click', calculate);
+      document.getElementById('btnEjemplo').addEventListener('click', loadExample);
+      document.getElementById('btnGuardar').addEventListener('click', () => { saveParams(); setStatus('Parámetros guardados en este navegador.', 'ok'); });
+      document.getElementById('btnPrint').addEventListener('click', () => window.print());
+      document.getElementById('btnLoadMonthTable').addEventListener('click', () => {
+        const rows = taxTables[els.taxTableMonthSelect.value] || [];
+        renderTaxEditor(rows.length ? rows : [{ period: 'MENSUAL', from: 0, to: null, factor: 0, rebate: 0 }]);
+        persistCurrentTaxRows();
+        setStatus(`Tabla local ${els.taxTableMonthSelect.options[els.taxTableMonthSelect.selectedIndex].text} cargada.`, 'ok');
+        calculate();
+      });
+      document.getElementById('btnAddTaxRow').addEventListener('click', () => {
+        currentTaxRows.push({ period: els.taxPeriodKind.value, from: 0, to: null, factor: 0, rebate: 0 });
+        persistCurrentTaxRows();
+        renderTaxEditor(currentTaxRows);
+        calculate();
+      });
+      document.getElementById('btnFetchApi').addEventListener('click', fetchTaxApi);
+      document.getElementById('btnExportJson').addEventListener('click', exportTaxJson);
+      document.getElementById('btnImportJson').addEventListener('click', () => document.getElementById('fileImportJson').click());
+      document.getElementById('fileImportJson').addEventListener('change', e => {
+        const file = e.target.files?.[0];
+        if (file) importTaxJson(file);
+        e.target.value = '';
+      });
+    }
+
+    loadParams();
+    bindEvents();
+    loadCurrentTaxTable();
+    calculate();
+  </script>
+</body>
+</html>
